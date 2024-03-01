@@ -1,31 +1,32 @@
 import { useCanvasContext } from "../hooks/useCanvas";
-import useDims from "../hooks/useDim"
+import useDims from "../hooks/useDim";
 import Wave from "../classes/Wave";
 
 const Sine = () => {
   const { context } = useCanvasContext();
   const { width, height } = useDims();
 
-  let frequency = 0.02;
-  let timer = 1;
+  let phase = 0;
+  let time = 0;
   const waves = [
-    new Wave([0.01, 0.03, 0.04], generateColor()),
-    new Wave([0.03, 0.04, 0.05], generateColor()),
-    new Wave([0.04, 0.05, 0.06], generateColor()),
+    new Wave( generateColor(), 0.01, 0.01, 250),
   ];
 
   const render = () => {
     context?.clearRect(0, 0, width, height);
-    
-    waves.forEach((wave) => {
-      wave.draw(context, width, height, frequency);
-    })
 
-    if (timer === 100) {
-      timer = 1;
+    waves.forEach((wave) => {
+      wave.draw(context!, width, height, phase);
+      // colorShift(wave);
+    });
+
+    if (time === 100) {
+      time = 0;
     }
-    timer++;
-    frequency += 0.02;
+
+    time += 0.01;
+    phase += 0.03;
+
     requestAnimationFrame(render);
   };
   if (context) render();
@@ -33,11 +34,34 @@ const Sine = () => {
 };
 
 function generateColor() {
-  const red = 255 - Math.random() * 255;
-  const green = 255 - Math.random() * 255;
-  const blue = 255 - Math.random() * 255;
 
-  return `rgba(${red}, ${green}, ${blue}, 0.5)`;
+  const red = 255 - Math.random() * 200;
+  const green = 255 - Math.random() * 200;
+  const blue = 255 - Math.random() * 200;
+
+  return [red, green, blue];
+}
+
+function colorShift(wave: Wave) {
+  const currentColor = wave.waveColor;
+  let red = currentColor[0];
+  let green = currentColor[1];
+  let blue = currentColor[2];
+
+  const check = Math.random() * 100 > 50;
+
+  red = check ? red + 2 : red - 2;
+  green = check ? green + 1 : green - 1;
+  blue = check ? blue + 2 : blue - 2;
+
+  if (red > 255) red = 254;
+  if (red < 0) red = 1;
+  if (green > 255) green = 254;
+  if (green < 0) green = 1;
+  if (blue > 255) blue = 254;
+  if (blue < 0) blue = 1;
+
+  wave.waveColor = [red, green, blue];
 }
 
 export default Sine;
