@@ -1,19 +1,21 @@
-import { useRef, FC, useEffect, useState } from 'react'
+import { useRef, FC, useEffect, useState } from "react";
 
-import { CanvasContext } from '../hooks/useCanvas'
-import useDims from '../hooks/useDim'
-import Sine from './Sine'
+import { CanvasContext } from "../hooks/useCanvas";
+import useDims from "../hooks/useDim";
+import Sine from "./Sine";
 
-const Canvas: FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { width, height } = useDims()
+const Canvas: FC<HTMLCanvasElement> = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { width, height } = useDims();
 
-  const [context, setContext] = useState<CanvasRenderingContext2D | undefined>()
+  const [context, setContext] = useState<
+    CanvasRenderingContext2D | undefined
+  >();
 
   useEffect(() => {
-    const ctx = canvasRef?.current?.getContext('2d')
-    if (ctx) setContext(ctx)
-  }, [])
+    const ctx = canvasRef?.current?.getContext("2d");
+    if (ctx) setContext(ctx);
+  }, []);
 
   return (
     <>
@@ -25,9 +27,10 @@ const Canvas: FC = () => {
           height={height}
         ></canvas>
         <Sine />
+        <Sine />
       </CanvasContext.Provider>
     </>
-  )
-}
+  );
+};
 
-export default Canvas
+export default Canvas;

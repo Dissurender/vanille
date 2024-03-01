@@ -9,7 +9,10 @@ const Sine = () => {
   let phase = 0;
   let time = 0;
   const waves = [
-    new Wave( generateColor(), 0.01, 0.01, 250),
+    new Wave(generateColor(), 0.01, 0.015, 250),
+    new Wave(generateColor(), 0.02, 0.02, 200),
+    new Wave(generateColor(), 0.01, 0.015, 220),
+    new Wave(generateColor(), 0.02, 0.01, 215),
   ];
 
   const render = () => {
@@ -17,14 +20,17 @@ const Sine = () => {
 
     waves.forEach((wave) => {
       wave.draw(context!, width, height, phase);
-      // colorShift(wave);
+      colorShift(wave);
     });
 
-    if (time === 100) {
+    if (time > 100) {
       time = 0;
     }
+    time += 1;
 
-    time += 0.01;
+    if (phase > 2 * Math.PI) {
+      phase = 0;
+    }
     phase += 0.03;
 
     requestAnimationFrame(render);
@@ -34,7 +40,6 @@ const Sine = () => {
 };
 
 function generateColor() {
-
   const red = 255 - Math.random() * 200;
   const green = 255 - Math.random() * 200;
   const blue = 255 - Math.random() * 200;
