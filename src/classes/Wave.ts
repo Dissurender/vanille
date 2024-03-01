@@ -1,12 +1,14 @@
 class Wave {
   private color: number[]
   private vShift: number
+  private hShift: number
   private period: number
   private amplitude: number
 
-  constructor(color: number[], vShift: number, period: number, amplitude: number) {
+  constructor(color: number[], hShift: number, vShift: number, period: number, amplitude: number) {
     this.color = color
     this.vShift = vShift
+    this.hShift = hShift
     this.period = period
     this.amplitude = amplitude
   }
@@ -19,9 +21,9 @@ class Wave {
     return this.color
   }
 
-  private formatColor = (color: number[]): string => {
-    return `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`
-  }
+  // private formatColor = (color: number[]): string => {
+  //   return `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`
+  // }
 
   private createStroke = () => {
     const color = this.color
@@ -36,24 +38,22 @@ class Wave {
     phase: number
   ): void => {
     context.beginPath()
-    context.moveTo(0, height - 400 - Math.sin(phase) * this.amplitude)
-    // context.moveTo(0, height)
+    context.moveTo(0, height - 400 + Math.sin(phase) * this.amplitude)
 
     for (let i = 0; i < width; i++) {
-      const y = Math.sin((i * this.period) + phase) * this.amplitude + this.vShift
-      const x = Math.cos((i * this.period) + phase + this.vShift)
-      // const x = 2.5
-      context.lineTo(i * 2.5 , height - 400 - y )
+      const x = i * 2.5
+      const y = Math.sin((i * this.period) - phase) * this.amplitude + this.vShift
+      context.lineTo(x, height - 400 - y)
     }
 
     context.lineTo(width, height)
     context.strokeStyle = this.createStroke()
     context.lineWidth = 2
     context.stroke()
-  
+
     // context.fillStyle = this.formatColor(this.color)
     // context.fill()
-    // context.closePath()
+    context.closePath()
   }
 }
 

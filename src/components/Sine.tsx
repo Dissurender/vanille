@@ -9,10 +9,10 @@ const Sine = () => {
   let phase = 0;
   let time = 0;
   const waves = [
-    new Wave(generateColor(), 0.01, 0.015, 250),
-    new Wave(generateColor(), 0.02, 0.02, 200),
-    new Wave(generateColor(), 0.01, 0.015, 220),
-    new Wave(generateColor(), 0.02, 0.01, 215),
+    new Wave(generateColor(), 2, 0.01, 0.015, 250),
+    new Wave(generateColor(), 1, 0.02, 0.02, 200),
+    new Wave(generateColor(), 3, 0.01, 0.015, 220),
+    new Wave(generateColor(), 2.5, 0.02, 0.01, 215),
   ];
 
   const render = () => {
