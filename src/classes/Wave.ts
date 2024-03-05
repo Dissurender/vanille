@@ -24,7 +24,7 @@ class Wave {
   private createStroke = () => {
     const color = this.color
 
-    return `rgba(${color[0] / 2}, ${color[1] / 2}, ${color[2] / 2}, 0.8)`
+    return `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.9)`
   }
 
   public draw = (

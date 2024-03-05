@@ -27,8 +27,7 @@ const Canvas: FC<HTMLCanvasElement> = () => {
           width={width}
           height={height}
         ></canvas>
-        <Sine />
-        <Sine />
+        <Sine width={width} height={height} />
       </CanvasContext.Provider>
     </>
   );

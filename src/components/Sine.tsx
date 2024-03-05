@@ -1,29 +1,33 @@
 import { useCanvasContext } from "../hooks/useCanvas";
-import useDims from "../hooks/useDim";
 import Wave from "../classes/Wave";
-import { generateColor } from "../helpers/Colors";
+import { colorShift, generateColor } from "../helpers/Colors";
+import { FC } from "react";
 
 // TODO: Refactor to be able to use instantiate multiple waves
 
-const Sine = () => {
+interface SineProps {
+  width: number;
+  height: number;
+}
+
+const Sine: FC<SineProps> = (props) => {
   const { context } = useCanvasContext();
-  const { width, height } = useDims();
 
   let phase = 0;
   let time = 0;
   const waves = [
     new Wave(generateColor(), 2, 0.01, 0.015, 250),
-    new Wave(generateColor(), 1, 0.02, 0.02, 200),
-    new Wave(generateColor(), 3, 0.01, 0.015, 220),
+    new Wave(generateColor(), 1, 0.02, 0.03, 200),
+    new Wave(generateColor(), 3, 0.01, 0.02, 220),
     new Wave(generateColor(), 2.5, 0.02, 0.01, 215),
   ];
 
   const render = () => {
-    context?.clearRect(0, 0, width, height);
+    context?.clearRect(0, 0, props.width, props.height);
 
     waves.forEach((wave) => {
-      wave.draw(context!, width, height, phase);
-      colorShift(wave);
+      wave.draw(context!, props.width, props.height, phase);
+      wave.waveColor = colorShift(wave.waveColor);
     });
 
     if (time > 100) {
@@ -41,32 +45,5 @@ const Sine = () => {
   if (context) render();
   return null;
 };
-
-/*
- * Helper functions
- */
-
-// Shift the color of the wave over time
-function colorShift(wave: Wave) {
-  const currentColor = wave.waveColor;
-  let red = currentColor[0];
-  let green = currentColor[1];
-  let blue = currentColor[2];
-
-  const check = Math.random() * 100 > 50;
-
-  red = check ? red + 2 : red - 2;
-  green = check ? green + 1 : green - 1;
-  blue = check ? blue + 2 : blue - 2;
-
-  if (red > 255) red = 254;
-  if (red < 0) red = 1;
-  if (green > 255) green = 254;
-  if (green < 0) green = 1;
-  if (blue > 255) blue = 254;
-  if (blue < 0) blue = 1;
-
-  wave.waveColor = [red, green, blue];
-}
 
 export default Sine;
