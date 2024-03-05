@@ -1,6 +1,9 @@
 import { useCanvasContext } from "../hooks/useCanvas";
 import useDims from "../hooks/useDim";
 import Wave from "../classes/Wave";
+import { generateColor } from "../helpers/Colors";
+
+// TODO: Refactor to be able to use instantiate multiple waves
 
 const Sine = () => {
   const { context } = useCanvasContext();
@@ -39,14 +42,11 @@ const Sine = () => {
   return null;
 };
 
-function generateColor() {
-  const red = 255 - Math.random() * 200;
-  const green = 255 - Math.random() * 200;
-  const blue = 255 - Math.random() * 200;
+/*
+ * Helper functions
+ */
 
-  return [red, green, blue];
-}
-
+// Shift the color of the wave over time
 function colorShift(wave: Wave) {
   const currentColor = wave.waveColor;
   let red = currentColor[0];

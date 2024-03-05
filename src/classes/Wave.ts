@@ -1,7 +1,7 @@
 class Wave {
   private color: number[]
   private vShift: number
-  private hShift: number
+  private hShift: number // hShift is used to offset the wave to appear unique
   private period: number
   private amplitude: number
 
@@ -21,10 +21,6 @@ class Wave {
     return this.color
   }
 
-  // private formatColor = (color: number[]): string => {
-  //   return `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`
-  // }
-
   private createStroke = () => {
     const color = this.color
 
@@ -38,23 +34,24 @@ class Wave {
     phase: number
   ): void => {
     context.beginPath()
-    context.moveTo(0, height - 400 + Math.sin(phase) * this.amplitude)
+    context.moveTo(0, height - 400 + Math.sin((phase + this.hShift)) * this.amplitude)
 
     for (let i = 0; i < width; i++) {
       const x = i * 2.5
-      const y = Math.sin((i * this.period) - phase) * this.amplitude + this.vShift
+      const y = Math.sin((i * this.period) - (phase + this.hShift)) * this.amplitude + this.vShift
       context.lineTo(x, height - 400 - y)
     }
 
     context.lineTo(width, height)
+    
     context.strokeStyle = this.createStroke()
     context.lineWidth = 2
     context.stroke()
 
-    // context.fillStyle = this.formatColor(this.color)
-    // context.fill()
     context.closePath()
   }
 }
 
 export default Wave
+
+// https://www.mathsisfun.com/algebra/amplitude-period-frequency-phase-shift.html

@@ -21,7 +21,8 @@ const Canvas: FC<HTMLCanvasElement> = () => {
     <>
       <CanvasContext.Provider value={{ context: context }}>
         <canvas
-          id="canvas"
+          id="main--canvas"
+          role="canvas"
           ref={canvasRef}
           width={width}
           height={height}
