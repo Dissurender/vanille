@@ -6,7 +6,7 @@ import App from "../App";
 describe("Main page rendering", async () => {
   it("should render", async () => {
     render(<App />);
-    const title = await screen.queryByText("this is a title");
+    const title = await screen.queryByText("Here's your sine");
 
     expect(title).not.toBeNull();
     expect(title).toBeInstanceOf(HTMLElement);

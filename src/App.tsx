@@ -5,7 +5,7 @@ import Sine from "./components/Sine";
 function App() {
   return (
     <main>
-      <h1>this is a title</h1>
+      <h1>Here's your sine</h1>
       <Canvas />
       <Sine />
     </main>
