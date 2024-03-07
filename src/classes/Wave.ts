@@ -34,16 +34,16 @@ class Wave {
     phase: number
   ): void => {
     context.beginPath()
-    context.moveTo(0, height - 400 + Math.sin((phase + this.hShift)) * this.amplitude)
+    context.moveTo(0, height - height / 2 + Math.sin((phase + this.hShift)) * this.amplitude)
 
     for (let i = 0; i < width; i++) {
       const x = i * 2.5
       const y = Math.sin((i * this.period) - (phase + this.hShift)) * this.amplitude + this.vShift
-      context.lineTo(x, height - 400 - y)
+      context.lineTo(x, height - height / 2 - y)
     }
 
     context.lineTo(width, height)
-    
+
     context.strokeStyle = this.createStroke()
     context.lineWidth = 2
     context.stroke()
