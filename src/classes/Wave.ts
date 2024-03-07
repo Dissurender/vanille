@@ -5,6 +5,7 @@ class Wave {
   private period: number
   private amplitude: number
 
+
   constructor(color: number[], hShift: number, vShift: number, period: number, amplitude: number) {
     this.color = color
     this.vShift = vShift
@@ -31,8 +32,11 @@ class Wave {
     context: CanvasRenderingContext2D,
     width: number,
     height: number,
-    phase: number
+    time: number,
   ): void => {
+
+    const phase = time / 60
+
     context.beginPath()
     context.moveTo(0, height - height / 2 + Math.sin((phase + this.hShift)) * this.amplitude)
 
