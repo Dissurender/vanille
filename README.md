@@ -7,7 +7,7 @@
 ## Description
 
 - Vanille is a small dive into what I could do with React and TypeScript
-- Learned concepts: Value Propagation,
+- Learned concepts: Canvas Mutations, Value Propagation, OOP, Functional Components, Hooks.
 
 ## Features
 
