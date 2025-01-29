@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import Sine from "../components/Sine";
 
@@ -8,4 +8,6 @@ describe("Sine rendering with props", async () => {
     render(<Sine width={100} height={100} />);
 
   });
+
+  expect(document.querySelector("canvas")).not.toBeNull();
 });

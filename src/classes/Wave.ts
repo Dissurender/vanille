@@ -38,7 +38,8 @@ class Wave {
     const phase = time / 60
 
     context.beginPath()
-    context.moveTo(0, height - height / 2 + Math.sin((phase + this.hShift)) * this.amplitude)
+    // context.moveTo(width / 2, height - height / 2 + Math.sin((phase + this.hShift)) * this.amplitude)
+    context.moveTo(0, height / 2)
 
     for (let i = 0; i < width; i++) {
       const x = i * 2.5

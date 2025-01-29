@@ -1,7 +1,6 @@
 import { useCanvasContext } from "../hooks/useCanvas";
 import Wave from "../classes/Wave";
 import { colorShift, generateColor } from "../helpers/Colors";
-import { FC } from "react";
 
 // TODO: Refactor to be able to use instantiate multiple waves
 
@@ -10,7 +9,7 @@ interface SineProps {
   height: number;
 }
 
-const Sine: FC<SineProps> = (props) => {
+const Sine: React.FC<SineProps> = (props) => {
   const { context } = useCanvasContext();
 
   let time = 0;

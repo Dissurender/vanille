@@ -1,10 +1,10 @@
-import { useRef, FC, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import { CanvasContext } from "../hooks/useCanvas";
 import useDims from "../hooks/useDim";
 import Sine from "./Sine";
 
-const Canvas: FC<HTMLCanvasElement> = () => {
+const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { width, height } = useDims();
 

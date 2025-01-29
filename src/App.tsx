@@ -7,7 +7,7 @@ function App() {
     <main>
       <h1>Here's your sine</h1>
       <Canvas />
-      <Sine />
+      <Sine width={500} height={300} />
     </main>
   );
 }
